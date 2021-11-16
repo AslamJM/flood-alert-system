@@ -1,0 +1,66 @@
+body {
+  background-color: #e4e9e1;
+}
+.App {
+  text-align: center;
+}
+.App h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+#map {
+  max-width: 1200px;
+  border: 2px solid green;
+  position: relative;
+  background-image: url("./aaru.PNG");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+  width: 1200px;
+  margin: auto;
+}
+
+#map .alertbox {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+}
+.main {
+  max-width: 1200px;
+  margin: 50px auto;
+  margin-bottom: 50px;
+  border: 1px solid black;
+  padding: 12px;
+  background-color: white;
+}
+
+#location {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#chart {
+  flex: 1;
+  width: 300px;
+}
+
+#alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#rain {
+  flex: 1;
+}
+#alert .off,
+#alert .on {
+  border: 1px solid black;
+  margin: 2px;
+  width: 30px;
+  height: 30px;
+}
