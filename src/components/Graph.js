@@ -1,49 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
-function Graph() {
+function Graph({ data }) {
+  const [csvData, setCsvData] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  let csvarray = [];
+  const rainData = data.map((d) => d.depth);
+
+  const readcsv = async () => {
+    const res = await fetch(
+      "https://raw.githubusercontent.com/AslamJM/Personal-Portfolio-Template/main/predicted-data.csv"
+    );
+    const data = await res.text();
+    const rows = data.split(/\r?\n/);
+    rows.forEach((row) => {
+      const arr = row.split(",");
+      csvarray.push(Number(arr[1]));
+    });
+    setCsvData(csvarray);
+  };
+
+  const findMatch = (arr) => {
+    let max = Math.max(rainData);
+    const index = arr.findIndex((d) => Math.abs(d - max) <= 5);
+    const slice = arr.slice(index, index + 9);
+    setFiltered(slice);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(
-        "https://api.thingspeak.com/channels/1552300/feeds.json?api_key=84AIJF4C5LPA88QG&results=10"
-      );
-      const data = await res.json();
-      setChartData({
-        labels: data.feeds.map((feed) => feed.created_at),
-        datasets: [
-          {
-            label: "Depth",
-            data: data.feeds.map((feed) => feed.field1),
-            backgroundColor: [
-              "#ffbb11",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0",
-            ],
-          },
-        ],
-      });
-    };
-
-    fetchData();
-  });
-  const [chartData, setChartData] = useState({});
+    readcsv();
+    findMatch(csvData);
+  }, []);
 
   return (
-    <div>
-      <Bar
-        data={chartData}
+    <div className="graph">
+      <Line
+        data={{
+          labels: filtered.map((d, index) => {
+            return index;
+          }),
+          datasets: [
+            {
+              label: "prediction data",
+              fill: false,
+              lineTension: 0.5,
+              backgroundColor: "rgba(75,192,192,1)",
+              borderColor: "rgba(0,0,0,1)",
+              borderWidth: 2,
+              data: filtered,
+            },
+          ],
+        }}
         options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Cryptocurrency prices",
-            },
-            legend: {
-              display: true,
-              position: "bottom",
-            },
+          title: {
+            display: true,
+            text: "old data",
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: "right",
           },
         }}
       />

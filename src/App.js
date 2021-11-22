@@ -4,7 +4,7 @@ import Location from "./components/Location";
 import MapStatic from "./components/MapStatic";
 
 const URL1 =
-  "https://api.thingspeak.com/channels/1552300/feeds.json?api_key=84AIJF4C5LPA88QG&results=10";
+  "https://api.thingspeak.com/channels/1572447/feeds.json?api_key=BQC0B7MFF51GDFSU&results=10";
 
 function App() {
   const [data1, setData1] = useState([]);
@@ -12,7 +12,6 @@ function App() {
   const [data3, setData3] = useState([]);
   const [data4, setData4] = useState([]);
   const [data5, setData5] = useState([]);
-
   const [weatherData, setWeatherData] = useState({});
 
   const fetchWeather = async () => {
@@ -37,26 +36,39 @@ function App() {
     switch (num) {
       case 1:
         setData1(chartdata);
+        break;
       case 2:
         setData2(chartdata);
+        break;
       case 3:
         setData3(chartdata);
+        break;
       case 4:
         setData4(chartdata);
+        break;
       case 5:
         setData5(chartdata);
+        break;
+      default:
     }
   };
 
   useEffect(() => {
-    fetchData(URL1, 1);
-    fetchWeather();
+    const interval = setInterval(() => {
+      fetchData(URL1, 1);
+      fetchWeather();
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="App">
-      <h1>Flood Alert System</h1>
-      <MapStatic />
+      <div className="title">
+        <h1>
+          Flood <span>Alert</span> System{" "}
+        </h1>
+      </div>
+      <MapStatic data={data1} />
       <Location data={data1} num="1" weatherData={weatherData} />
       <Location data={data1} num="2" weatherData={weatherData} />
       <Location data={data1} num="3" weatherData={weatherData} />
