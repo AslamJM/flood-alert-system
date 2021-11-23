@@ -5,8 +5,7 @@ function Graph({ data }) {
   const [csvData, setCsvData] = useState([]);
   const [filtered, setFiltered] = useState([]);
   let csvarray = [];
-  const rainData = data.map((d) => d.depth);
-
+  const rainData = data.map((d) => parseFloat(d.depth));
   const readcsv = async () => {
     const res = await fetch(
       "https://raw.githubusercontent.com/AslamJM/Personal-Portfolio-Template/main/predicted-data.csv"
@@ -21,8 +20,8 @@ function Graph({ data }) {
   };
 
   const findMatch = (arr) => {
-    let max = Math.max(rainData);
-    const index = arr.findIndex((d) => Math.abs(d - max) <= 5);
+    let max = Math.max(...rainData);
+    const index = arr.findIndex((d) => Math.abs(d * 100 - max) <= 10);
     const slice = arr.slice(index, index + 9);
     setFiltered(slice);
   };

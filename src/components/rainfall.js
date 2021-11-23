@@ -4,23 +4,24 @@ import Alert from "./Alert";
 function Rainfall({ weatherData, alert }) {
   return (
     <div id="rain">
-      <h2>Weather Details</h2>
+      <h2>Current Weather Info</h2>
       <div className="weather">
-        <div>
+        <div className="weather-item">
           <p>
-            <span>humidity :</span> {weatherData.humidity}
+            <span>humidity :</span> {weatherData.humidity} %
           </p>
         </div>
-        <div>
+        <div className="weather-item">
           <p>
             <span>pressure : </span>
-            {weatherData.pressure}
+            {weatherData.pressure} hPa
           </p>
         </div>
 
-        <div>
+        <div className="weather-item">
           <p>
-            <span> temperature :</span> {weatherData.temp}
+            <span> temperature :</span> {(weatherData.temp - 273.15).toFixed(2)}{" "}
+            <span>&#8451;</span>
           </p>
         </div>
       </div>
