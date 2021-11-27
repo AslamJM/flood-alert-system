@@ -3,18 +3,19 @@ import "./App.css";
 import Location from "./components/Location";
 import MapStatic from "./components/MapStatic";
 
-const URL1 =
-  "https://api.thingspeak.com/channels/1572447/feeds.json?api_key=BQC0B7MFF51GDFSU&results=10";
+const URL1 = //sensor reading API
+  "https://api.thingspeak.com/channels/1572447/feeds.json?api_key=PD7P1JRZEB50K14P&results=10";
 
 function App() {
-  const [data1, setData1] = useState([]);
+  const [data1, setData1] = useState([]); //data for location 1
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
   const [data4, setData4] = useState([]);
   const [data5, setData5] = useState([]);
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({}); //data from weather
 
   const fetchWeather = async () => {
+    //fetching current weather data
     const res = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=7.644&lon=80.835&appid=06264407251afce3963cbdbac53c447d"
     );
@@ -23,6 +24,7 @@ function App() {
   };
 
   const fetchData = async (url, num) => {
+    //fetching latest sensor reading
     const res = await fetch(url);
     const data = await res.json();
     const chartdata = data.feeds.map((feed) => {
@@ -54,6 +56,7 @@ function App() {
   };
 
   useEffect(() => {
+    //refresh site
     const interval = setInterval(() => {
       fetchData(URL1, 1);
       fetchWeather();
@@ -68,7 +71,9 @@ function App() {
           Flood <span>Alert</span> System{" "}
         </h1>
       </div>
+      {/*passing the data to components */}
       <MapStatic data={data1} />
+      {/*graphs for for locations */}
       <Location data={data1} num="1" weatherData={weatherData} />
       <Location data={data1} num="2" weatherData={weatherData} />
       <Location data={data1} num="3" weatherData={weatherData} />

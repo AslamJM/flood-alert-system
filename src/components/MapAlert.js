@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 function MapAlert({ left, bottom, data }) {
   const [alert, setAlert] = useState(false);
   useEffect(() => {
-    const alertState = data.find((d) => {
-      return d.depth > 20 && d.rainfall > 1000 && d.waterspeed === 1;
+    const alertState = data.filter((d) => {
+      return d.depth < 10 && d.rainfall === 1 && d.waterspeed <= 1000;
     });
-    setAlert(alertState);
+    console.log(alertState);
+    setAlert(alertState.length > 0);
   }, [data]);
 
   return (
