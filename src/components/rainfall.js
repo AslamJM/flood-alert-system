@@ -7,7 +7,10 @@ function Rainfall({ weatherData, alert }) {
       <h2>Current Weather Info</h2>
       <div className="linkout">
         <a href=" http://rifkhan955.pythonanywhere.com/" target="_blank">
-          Predict Water Level
+          <button>Predict Water Level</button>
+        </a>
+        <a href=" http://rifkhan9555.pythonanywhere.com/" target="_blank">
+          <button>Predict flood Status</button>
         </a>
       </div>
       <div className="weather">

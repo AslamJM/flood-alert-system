@@ -4,7 +4,11 @@ function MapAlert({ left, bottom, data }) {
   const [alert, setAlert] = useState(false);
   useEffect(() => {
     const alertState = data.filter((d) => {
-      return d.depth < 10 && d.rainfall === 1 && d.waterspeed <= 1000;
+      return (
+        Number(d.depth) < 10 &&
+        Number(d.rainfall) === 1 &&
+        Number(d.waterspeed) >= 1000
+      );
     });
     console.log(alertState);
     setAlert(alertState.length > 0);

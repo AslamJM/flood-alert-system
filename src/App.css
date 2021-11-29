@@ -105,17 +105,27 @@ body {
 }
 
 .linkout {
-  background-color: blue;
-  border-radius: 5px;
   padding: 7px 10px;
-  margin: 10px 30%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .linkout a {
   text-decoration: none;
   font-size: 20px;
   color: white;
+}
+.linkout a button {
+  background-color: blue;
+  padding: 10px 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px -5px black;
+}
+.linkout a button:hover {
+  background-color: darkblue;
 }
