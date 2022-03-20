@@ -4,7 +4,7 @@ import Location from "./components/Location";
 import MapStatic from "./components/MapStatic";
 
 const URL1 = //sensor reading API
-  "https://api.thingspeak.com/channels/1572447/feeds.json?api_key=PD7P1JRZEB50K14P&results=10";
+  "https://api.thingspeak.com/channels/1571022/feeds.json?api_key=JLRNSFA8WW23OD4F&results=10";
 
 function App() {
   const [data1, setData1] = useState([]); //data for location 1
@@ -67,12 +67,10 @@ function App() {
   return (
     <div className="App">
       <div className="title">
-        <h1>
-          Flood <span>Alert</span> System{" "}
-        </h1>
+        <h1>UNDER WATER SYSTEM</h1>
       </div>
       {/*passing the data to components */}
-      <MapStatic data={data1} />
+      {/* <MapStatic data={data1} /> */}
       {/*graphs for for locations */}
       <Location data={data1} num="1" weatherData={weatherData} />
       <Location data={data1} num="2" weatherData={weatherData} />
